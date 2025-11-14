@@ -11,15 +11,24 @@ class SecureChatClient:
         self.running = False
     
     def perform_handshake(self):
-        """Выполнение криптографического рукопожатия (клиентская часть)"""
+
         print("Криптографическое рукопожатие...")
         
+
+
+
+
         # Генерация ключей
         self.crypto.generate_keypair()
         print("✓ RSA ключи сгенерированы")
         
+
+
+
         # Клиент сначала получает ключ сервера
         print("Ожидание публичного ключа от сервера...")
+
+
         while True:
             message = self.network.receive_message()
             if message:
@@ -29,27 +38,42 @@ class SecureChatClient:
                     break
             time.sleep(0.1)
         
+
+
         # Отправка своего публичного ключа
         key_message = generate_handshake_message(self.crypto, "key_exchange")
         self.network.send_message(key_message)
-        print("✓ Публичный ключ отправлен серверу")
+
+        print(" Публичный ключ отправлен серверу")
         
+
+
+
         # Ожидание сессионного ключа
         print("Ожидание сессионного ключа...")
+
+
         while True:
             message = self.network.receive_message()
             if message:
                 result = process_handshake_message(self.crypto, message)
                 if result == "session_established":
-                    print("✓ Сессионный ключ получен и установлен")
+                    print(" Сессионный ключ получен и установлен")
                     break
             time.sleep(0.1)
         
-        print("✓ Криптографическое рукопожатие завершено!")
+        print(" Криптографическое рукопожатие завершено!")
         print("Можете начинать безопасное общение!\n")
-    
+
+
+
+
+
+
     def receive_messages(self):
-        """Поток для приема сообщений"""
+
+
+
         while self.running:
             try:
                 encrypted_message = self.network.receive_message()
@@ -61,9 +85,14 @@ class SecureChatClient:
                 if self.running:
                     print(f"\nОшибка приема: {e}")
                 break
-    
+
+
+
+
+
+
     def send_messages(self):
-        """Поток для отправки сообщений"""
+
         while self.running:
             try:
                 message = input("Вы: ")
@@ -77,8 +106,12 @@ class SecureChatClient:
                 print(f"Ошибка отправки: {e}")
                 break
     
+
+
+
+
     def start(self):
-        """Запуск клиента"""
+
         print("=== Защищенный P2P Чат (Клиент) ===")
         
         try:
@@ -99,17 +132,25 @@ class SecureChatClient:
             send_thread.start()
             
             send_thread.join()
-            
+
+
+
         except Exception as e:
             print(f"Ошибка: {e}")
+
+
+
         finally:
             self.running = False
             self.network.close()
             print("\nЧат завершен.")
 
 if __name__ == "__main__":
-    # Укажите IP-адрес сервера для подключения
+
+
+
     server_host = input("Введите IP-адрес сервера (localhost для локального теста): ").strip()
+    
     if not server_host:
         server_host = 'localhost'
     
