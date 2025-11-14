@@ -4,12 +4,20 @@ from crypto_utils import CryptoManager, generate_handshake_message, process_hand
 from network_utils import NetworkManager
 
 class SecureChatClient:
+
+
+
+
     def __init__(self, host='localhost', port=8888):
         self.network = NetworkManager(host, port)
         self.crypto = CryptoManager()
         self.username = "Клиент"
         self.running = False
     
+
+
+
+
     def perform_handshake(self):
 
         print("Криптографическое рукопожатие...")
@@ -150,7 +158,7 @@ if __name__ == "__main__":
 
 
     server_host = input("Введите IP-адрес сервера (localhost для локального теста): ").strip()
-    
+
     if not server_host:
         server_host = 'localhost'
     
