@@ -15,7 +15,7 @@ secure_chat/
 └── client.py
 ```
 when:
-crypto_utils.py - is the file for setting up encryption
-network_utils.py - is a file for working with ports and connection
-server_client.py - is the server file , as well as the first client file
-client.py - is the client file
+- crypto_utils.py - is the file for setting up encryption
+- network_utils.py - is a file for working with ports and connection
+- server_client.py - is the server file , as well as the first client file
+- client.py - is the client file
