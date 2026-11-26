@@ -28,7 +28,7 @@ class SecureChatClient:
 
         # Генерация ключей
         self.crypto.generate_keypair()
-        print("✓ RSA ключи сгенерированы")
+        print("RSA ключи сгенерированы")
         
 
 
@@ -42,7 +42,7 @@ class SecureChatClient:
             if message:
                 result = process_handshake_message(self.crypto, message)
                 if result == "key_received":
-                    print("✓ Публичный ключ сервера получен")
+                    print("Публичный ключ сервера получен")
                     break
             time.sleep(0.1)
         
@@ -128,8 +128,7 @@ class SecureChatClient:
                 return
             
             self.running = True
-            
-            # Криптографическое рукопожатие
+
             self.perform_handshake()
             
             # Запуск потоков для приема и отправки
